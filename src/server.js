@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-var morgan = require('morgan')
+const morgan = require('morgan')
 
 const { validationErrorHandler, errorHandler } = require('./util/error_handlers');
 //const port = process.env.PORT || 5001;
