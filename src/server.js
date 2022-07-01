@@ -1,15 +1,47 @@
 require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan')
 
-app = express();
-app.use(cors())
-app.use(express.json())
+const { validationErrorHandler, errorHandler } = require('./util/error_handlers');
+//const port = process.env.PORT || 5001;
+const { port } = require('./util/config')
 
-app.get('/', (rec, res)=>{
-    res.send("Hello World");
+// Connect to mongoose
+require('./util/db_connection');
+
+// teh user routes
+const userRouter = require('./user/routes');
+
+const app = express();
+
+app.use(morgan('combined'))
+
+
+// this bit should give me access to the directory for the public folder - can i save images here ??
+// const path = require('path');
+// app.use(express.static(path.join(__dirname, './public')));
+
+
+// not sure if i should add this, it would the the /api-help endpoint
+// app.use('/api-info',express.static('api-info'));
+
+app.use(express.json());
+app.use(cors());
+
+// michael's test 
+// app.get('/', (rec, res)=> res.send("Hello World") );
+
+// everything in the users router is prepended by the '/users'
+app.use('/users', userRouter);
+
+
+// error handlers
+app.use(validationErrorHandler);
+app.use(errorHandler);
+
+app.listen(port, ()=>{
+    console.log(`App is listening on port ${port}`);
 })
 
-app.listen(process.env.PORT, ()=>{
-    console.log('app is listening');
-})
