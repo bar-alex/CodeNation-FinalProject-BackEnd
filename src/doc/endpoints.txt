@@ -1,0 +1,21 @@
+:: User end-poins ::
+
+-- login user, returns userObj and token
+POST /user/login/ {username, password} => {userObj, token}
+
+-- create user, returns userObj and token
+POST /user/register/ {userObj} => {userObj, token}
+
+-- update user, returns userObj, requires teh token and the password for self
+PATCH /user/:username {userObj, token, passwordVerify} => {userObj}
+
+-- delete user, requires token and password for self
+DELETE /user/:username {token, passwordVerify} => success/failure
+
+-- returns the userObj for self, requires the token
+GET /user/self {token} => {userObj}
+
+-- returns the userObj for teh provided username (doesn't have to be self)
+GET /user/:username {token} => {userObj}
+
+
