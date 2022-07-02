@@ -30,7 +30,7 @@ exports.validationErrorHandler = (err, req, res, next) => {
 
 
 exports.errorHandler = (err, req, res, next) => {
-    console.log(`-> errorHandler() is run with \nerr: ${err} \nnext: ${next}`);
+    console.log(`-> errorHandler() is run with \nerr: ${err} \n`);
 
     err.statusCode = err.statusCode || 500;
     const handledError = err.statusCode < 500;

@@ -1,18 +1,17 @@
 require('dotenv').config();
+const { port } = require('./util/config')
+const { validationErrorHandler, errorHandler } = require('./util/error_handlers');
 
 const express = require('express');
 const cors = require('cors');
-var morgan = require('morgan')
-
-const { validationErrorHandler, errorHandler } = require('./util/error_handlers');
-//const port = process.env.PORT || 5001;
-const { port } = require('./util/config')
+const morgan = require('morgan');
 
 // Connect to mongoose
 require('./util/db_connection');
 
-// teh user routes
+// the user routes
 const userRouter = require('./user/routes');
+
 
 const app = express();
 
