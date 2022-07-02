@@ -33,9 +33,9 @@ router.get('/self', authToken, getUser);
 router.get('/:username', authToken, getUser);
 
 // Update User { auth_password, password, full_name, email} => {user{}, token}
-router.patch('/update', authToken, authPassword, updateUser);
+router.patch('/self', authToken, authPassword, updateUser);
 
 // Delete self { auth_password } => success/failure
-router.delete('/delete', authToken, authPassword, deleteUser);
+router.delete('/self', authToken, authPassword, deleteUser);
 
 
