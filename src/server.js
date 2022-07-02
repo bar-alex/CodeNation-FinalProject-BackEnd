@@ -4,7 +4,15 @@ const { validationErrorHandler, errorHandler } = require('./util/error_handlers'
 
 const express = require('express');
 const cors = require('cors');
+<<<<<<< HEAD
 const morgan = require('morgan');
+=======
+const morgan = require('morgan')
+
+const { validationErrorHandler, errorHandler } = require('./util/error_handlers');
+//const port = process.env.PORT || 5001;
+const { port } = require('./util/config')
+>>>>>>> b76a7cc75e7294865ccb60c23e3c5544daf0e282
 
 // Connect to mongoose
 require('./util/db_connection');
