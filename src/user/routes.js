@@ -7,7 +7,8 @@ module.exports = router;
 // const router = require("express").Router();
 
 const {
-    authToken
+    authToken,
+    authPassword
 } = require('../middleware/auth')
 
 const {
@@ -28,9 +29,13 @@ router.post('/register', createUser);
 // Get User -- for the token =>{user}
 router.get('/self', authToken, getUser);
 
-// Get User -- by username
+// Get User -- by username => {user}
 router.get('/:username', authToken, getUser);
 
+// Update User { auth_password, password, full_name, email} => {user{}, token}
+router.patch('/self', authToken, authPassword, updateUser);
 
+// Delete self { auth_password } => success/failure
+router.delete('/self', authToken, authPassword, deleteUser);
 
 

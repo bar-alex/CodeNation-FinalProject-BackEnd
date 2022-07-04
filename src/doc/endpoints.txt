@@ -1,21 +1,62 @@
-:: User end-poins ::
+:: User end-points ::
 
 -- login user, returns userObj and token
-POST /user/login/ {username, password} => {userObj, token}
+POST /users/login/ {username, password} => {userObj, token}
 
 -- create user, returns userObj and token
-POST /user/register/ {userObj} => {userObj, token}
+POST /users/register/ {userObj} => {userObj, token}
 
 -- update user, returns userObj, requires teh token and the password for self
-PATCH /user/:username {userObj, token, passwordVerify} => {userObj}
+PATCH /users/self {userObj, token, auth_password} => {userObj}
 
 -- delete user, requires token and password for self
-DELETE /user/:username {token, passwordVerify} => success/failure
+DELETE /users/self {token, auth_password} => success/failure 
 
 -- returns the userObj for self, requires the token
-GET /user/self {token} => {userObj}
+GET /users/self {token} => {userObj}
 
 -- returns the userObj for teh provided username (doesn't have to be self)
-GET /user/:username {token} => {userObj}
+GET /users/:username {token} => {userObj}
 
 
+=== === === === === === === === === ===
+:: Route end-points ::
+{ route_name, activity_type(run,cycle,swim), title, cover, description, difficulty, distance, time, location, map_data}
+
+-- creates a new route, token is required
+POST /routes/create { routeObj, token } => { routeObj }
+
+-- updates the specified route, token is required
+PATCH /routes/:route_name { routeObj, token } => { routeObj }
+
+-- deletes the specified route, token is required
+DELETE /routes/:route_name {token} => {success/failure}
+
+-- returns the data for the specified route
+GET /routes/:route_name => { routeObj }
+
+-- returns an array with data for all routes
+GET /routes/all => [{route},]
+
+
+=== === === === === === === === === ===
+:: Activity end-points :: 
+{ userId, routeId, activity_type(run,cycle,swim), date_activity, distance, time_taken, pace, cal_burned }
+
+-- create a new activity, token is required
+POST /activities/create { activityObj, token } => { activityObj }
+
+-- updates the specified activiy, token is required
+PATCH /activities/:activity_id { activityObj, token } => { activityObj }
+
+-- deletes the specified activity, token is required
+DELETE /activities/:activity_id { token } => {success/failure}
+
+-- returns the data for a specified activity, token is required
+GET /activities/:activity_id { token } => { activityObj }
+
+-- returns a list of tokenized user's activities for the specified query parameters // all param are optional
+GET /activities/user/self ? activity_type= &route_name= &date_start=yyyy/mm/dd &date_end= { token } => [{ activityObj },]
+
+-- returns a list of specified user's activities for the specified query parameters // all param are optional
+GET /activities/user/:username ? activity_type= &route_name= &date_start=yyyy/mm/dd &date_end= { token } => [{ activityObj },]

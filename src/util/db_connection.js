@@ -12,6 +12,8 @@ const connection = async () => {
         await mongoose.connect( mongoDbUri );
         console.log("DB successfully connected");
     } catch (error) {
+        // what about this and express-async-errors ? if there's a connection problem with the database 
+        // there's no recovery from that, right ? 
         console.log(error);
         process.exit(1);
     }
