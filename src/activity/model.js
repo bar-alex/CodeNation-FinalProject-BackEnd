@@ -29,7 +29,7 @@ const activitySchema = new mongoose.Schema(
         },
         date_activity: {
             type: Date,
-            detault: () => new Date(),
+            default: () => new Date(),
             required: [true, "You must provide the date"],
         },
         distance: Number,
@@ -38,7 +38,7 @@ const activitySchema = new mongoose.Schema(
         cal_burned: Number,
     },
     {
-        timestamps: true,
+        timestamps: false,
         toJSON: { virtuals: true },
         toObject: { virtuals: true },
     }
