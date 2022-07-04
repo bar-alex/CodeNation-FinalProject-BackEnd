@@ -14,7 +14,8 @@ require('./util/db_connection');
 
 // the user routes
 const userRouter = require('./user/routes');
-const routeRouter = require('./routes/routes')  // the end-point routes (paths) of the router, in the 'activity routes' section
+const routeRouter = require('./routes/routes');  // the end-point routes (paths) of the router, in the 'activity routes' section
+const activityRouter = require('./activity/routes');
 
 const app = express();
 
@@ -32,14 +33,15 @@ app.use(morgan('combined'))
 app.use(express.json());
 app.use(cors());
 
-// michael's test 
-// app.get('/', (rec, res)=> res.send("Hello World") );
 
 // everything in the users router is prepended by the '/users'
 app.use('/users', userRouter);
 
 // everything in the routes router is prepended by the '/routes'
 app.use('/routes', routeRouter);
+
+// everything in the activities router is prepended by '/activities'
+app.use('/activities', activityRouter);
 
 
 // error handlers

@@ -1,44 +1,79 @@
-// routeId, userId, date, distance, time_taken, pace,
+// userId, 
+// routeId, 
+// activity_type(run,cycle,swim), 
+// date_activity, 
+// distance, 
+// time_taken, 
+// pace, 
+// cal_burned
 
 const mongoose = require("mongoose");
 const uniqueValidator = require('mongoose-unique-validator');
 
-const activitySchema = new mongoose.Schema({
-    route_name: {
-        type: String,
-        trim: true,
-        required: [true, "You must supply the unique name!"],
-        unique: true,
+const activitySchema = new mongoose.Schema(
+    {
+        userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: [true, "userId must be supplied!"]
+        },
+        routeId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Route',
+        },
+        activity_type: {
+            type: String,
+            enum: ['run', 'cycle', 'swim'],
+            default: 'run',
+            required: [true, "You must supply an activity_type ('run', 'cycle', 'swim')!"],
+        },
+        date_activity: {
+            type: Date,
+            detault: () => new Date(),
+            required: [true, "You must provide the date"],
+        },
+        distance: Number,
+        time_taken: Number,
+        pace: Number,
+        cal_burned: Number,
     },
-    
-
-    title: {
-        type: String,
-        trim: true,
-        required: [true, "You must supply the title!"],
-        unique: true,
-    },
-    description: {
-        type: String,
-        trim: true,
-    },
-    type: 
-})
+    {
+        timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
+    }
+);
 
 
-
-route_name:     req.body.route_name,
-title:          req.body.title
-description:    req.body.description,
-type:           req.body.type,
-difficulty:     req.body.difficulty,
-length:         req.body.length,
-time:           req.body.time,
-location:       req.body.location,
-map_data:       req.body.map_data,
+// catch and create/update validation errors 
+activitySchema.plugin(uniqueValidator, {
+    message: '{VALUE} is already in use',
+});
 
 
-userId: {
-    type: mongoose.Schema.Types.ObjectId,
+// users
+activitySchema.virtual('user', {
     ref: 'User',
-},
+    localField: 'userId',
+    foreignField: '_id',
+});
+
+
+// routes
+activitySchema.virtual('route', {
+    ref: 'Route',
+    localField: 'routeId',
+    foreignField: '_id',
+});
+
+
+// removed fields from return
+activitySchema.methods.toJSON = function () {
+    const activity = this.toObject();
+    return { ...activity, __v: undefined };
+};
+
+
+const Activity = mongoose.model('Activity', activitySchema);
+
+module.exports = Activity;

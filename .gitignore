@@ -2,3 +2,4 @@
 /.vscode
 .env
 playground.js
+debug.log

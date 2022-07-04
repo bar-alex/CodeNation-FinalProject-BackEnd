@@ -2,6 +2,7 @@
 // route_name:     req.body.route_name,
 // title:          req.body.title
 // activity_type:  req.body.activity_type,
+// cover_image:    req.body.cover_image,
 // description:    req.body.description,
 // difficulty:     req.body.difficulty,
 // distance:       req.body.length,
@@ -21,17 +22,21 @@ const routeSchema = new mongoose.Schema(
             required: [true, "You must supply the unique name!"],
             unique: true,
         },
+        activity_type: {
+            type: String,
+            enum: ['run', 'cycle', 'swim'],
+            default: 'run',
+            required: [true, "You must supply an activity_type ('run', 'cycle', 'swim')!"],
+        },
         title: {
             type: String,
             trim: true,
             required: [true, "You must supply the title!"],
             unique: true,
         },
-        activity_type: {
+        cover_image: {
             type: String,
-            enum: ['run', 'cycle', 'swim'],
-            default: 'run',
-            required: [true, "You must supply an activity_type ('run', 'cycle', 'swim')!"],
+            trim: true,
         },
         description: {
             type: String,
@@ -64,6 +69,14 @@ const routeSchema = new mongoose.Schema(
 
 routeSchema.plugin(uniqueValidator, {
     message: '{VALUE} is already in use',
+});
+
+
+// links to the 'activities' collection // Activity model
+routeSchema.virtual('activities',{
+    ref: 'Activity',
+    localField: '_id',
+    foreignField: 'routeId',
 });
 
 

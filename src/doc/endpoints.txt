@@ -21,19 +21,19 @@ GET /users/:username {token} => {userObj}
 
 === === === === === === === === === ===
 :: Route end-points ::
-{ route_name, activity_type(run,cycle,swim), title, description, difficulty, distance, time, location, map_data}
+{ route_name, activity_type(run,cycle,swim), title, cover, description, difficulty, distance, time, location, map_data}
 
 -- creates a new route, token is required
-POST /routes/create { routeObj, token } => {route}
+POST /routes/create { routeObj, token } => { routeObj }
 
 -- updates the specified route, token is required
-PATCH /routes/:route_name { routeObj, token } => {route}
+PATCH /routes/:route_name { routeObj, token } => { routeObj }
 
 -- deletes the specified route, token is required
 DELETE /routes/:route_name {token} => {success/failure}
 
 -- returns the data for the specified route
-GET /routes/:route_name => {route}
+GET /routes/:route_name => { routeObj }
 
 -- returns an array with data for all routes
 GET /routes/all => [{route},]
@@ -41,4 +41,22 @@ GET /routes/all => [{route},]
 
 === === === === === === === === === ===
 :: Activity end-points :: 
+{ userId, routeId, activity_type(run,cycle,swim), date_activity, distance, time_taken, pace, cal_burned }
 
+-- create a new activity, token is required
+POST /activities/create { activityObj, token } => { activityObj }
+
+-- updates the specified activiy, token is required
+PATCH /activities/:activity_id { activityObj, token } => { activityObj }
+
+-- deletes the specified activity, token is required
+DELETE /activities/:activity_id { token } => {success/failure}
+
+-- returns the data for a specified activity, token is required
+GET /activities/:activity_id { token } => { activityObj }
+
+-- returns a list of tokenized user's activities for the specified query parameters // all param are optional
+GET /activities/user/self ? activity_type= &route_name= &date_start=yyyy/mm/dd &date_end= { token } => [{ activityObj },]
+
+-- returns a list of specified user's activities for the specified query parameters // all param are optional
+GET /activities/user/:username ? activity_type= &route_name= &date_start=yyyy/mm/dd &date_end= { token } => [{ activityObj },]

@@ -1,7 +1,7 @@
 const Route = require('./model');
 const CustomError = require('../util/CustomError');
 
-// { route_name, title, activity_type, description, difficulty, distance, time, location, map_data}
+// { route_name, title, activity_type, cover_image, description, difficulty, distance, time, location, map_data}
 
 
 exports.createRoute = async (req, res, next) => {
@@ -12,6 +12,7 @@ exports.createRoute = async (req, res, next) => {
         route_name:     req.body.route_name,
         title:          req.body.title,
         activity_type:  req.body.activity_type,
+        cover_image:    req.body.cover_image,
         description:    req.body.description,
         difficulty:     req.body.difficulty,
         distance:       req.body.distance,
@@ -42,6 +43,7 @@ exports.updateRoute = async (req, res, next) => {
     if (req.body.route_name)    route.route_name    = req.body.route_name;
     if (req.body.title)         route.title         = req.body.title;
     if (req.body.activity_type) route.activity_type = req.body.activity_type;
+    if (req.body.cover_image)   route.cover_image   = req.body.cover_image;
     if (req.body.description)   route.description   = req.body.description;
     if (req.body.difficulty)    route.difficulty    = req.body.difficulty;
     if (req.body.distance)      route.distance      = req.body.distance;
@@ -62,10 +64,9 @@ exports.updateRoute = async (req, res, next) => {
 exports.deleteRoute = async (req, res, next) => {
     console.log('->deleteRoute() is run');
 
-    // already have user in req.user from authToken
     const result = await Route.deleteOne({ route_name: req.params.route_name });
     
-    // return ok if user was deleted, otherwise throw error
+    // return ok if route was deleted, otherwise throw error
     if (result.deletedCount === 1)
         res.send({message: `Route ${req.params.route_name} was deleted`});
     else 
@@ -73,14 +74,14 @@ exports.deleteRoute = async (req, res, next) => {
 };
 
 
-// will return teh data from a user, its activities (maybe rivals and more)
+// will return the data from a route
 // uses the :route_name provided as a parameter 
-// or uses the /all endpoint to retrieve a list
+// or uses the /all endpoint to retrieve all in a list
 exports.getRoute = async (req, res, next) => {
     console.log('-> getRoute() is run, ',
-        '\n->   req.params: ', req.params,
-        '\n->   req.query: ',req.query,
-        '\n->   req.route.path: ',req.route.path);    
+        '\n->   req.params: ',     req.params,
+        '\n->   req.query: ',      req.query,
+        '\n->   req.route.path: ', req.route.path);    
 
     // is endpoint (path) is /all then it will return an array with all the routes, 
     // otherwise a parameter of the name must ne specified
