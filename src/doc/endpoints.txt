@@ -46,7 +46,7 @@ GET /routes/all => [{route},]
 -- create a new activity, token is required
 POST /activities/create { activityObj, token } => { activityObj }
 
--- updates the specified activiy, token is required
+-- updates the specified activity, token is required
 PATCH /activities/:activity_id { activityObj, token } => { activityObj }
 
 -- deletes the specified activity, token is required
