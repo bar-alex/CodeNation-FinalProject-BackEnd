@@ -1,46 +1,47 @@
 :: users - holds the users
     _id
-    username: S,U
-    password: S
-    email: S,U
-    full_name: S
-    is_disabled: B      // maybe, later
-    is_admin: B         // maybe, later 
+    username:   S,U
+    password:   S
+    email:      S,U
+    full_name:  S
+    is_disabled:B      // maybe, later
+    is_admin:   B      // maybe, later 
 
-// User.Activity --> this point to the activities collection, the Activity model
+// User.Activity --> this point to the activities collection, the Activity model 
 // User.findByCredentials( {username, password} ) => User/null if password matches for the user
 // User.generateAuthToken() => token for this user
-// User.toJSON() => json object of User, with password and _v set to undefined
+// User.toJSON() => json object of User, with password and _v removed
 
 
-:: rivals - links two users in a rivalry // stretch goal
+
+:: routes - holds the routes that a user can choose to workout on
     _id
-    user1Id - _id.User
-    user2Id - _id.User
+    route_name:     S,U
+    activity_type:  S,('run','cycle',swim)
+    title:          S
+    cover_image:    S
+    description:    S
+    difficulty:     S,('easy','moderate','difficult')
+    distance:       N
+    time:           N
+    location:       S   // maybe, later
+    map_data:       S   // something that setups the map
 
+// Route.findByRouteName( {route_name} ) => returns the route for the provided route_name
+// Route.findByActivityType( {activity_type} ) => will return a list of routes that have the specified activity_type
+// Route.toJSON() => json object of Route, with _v removed
 
-:: routes - the preset routes for exercise (run, cycle)
-    _id
-    activity_type: enum (cycle,run,etc)
-    distance
-    time
-    difficulty
-
-
-// teh activities that are available
-const activityTypes = ['run','cycle','swim'];
 
 
 :: activities - will hold the recorded activities (runs, cycling, etc)
     _id
-    userId  - _id.User
-    routeId - _id.Route
-    activity_type: enum(cycle,run,etc) // same thing in the Route
-    time_taken
-    distance_done
-    calories_burned
+    userId:         _id.User
+    routeId:        _id.Route
+    activity_type:  S,('run','cycle','swim'), 
+    date_activity:  D
+    distance:       N
+    time_taken:     N
+    pace:           N
+    cal_burned:     N
 
-
-
-
-
+// Activity.toJSON() => json object of Activity, with _v removed

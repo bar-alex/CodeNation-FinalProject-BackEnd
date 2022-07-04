@@ -1,7 +1,7 @@
 
 // route_name:     req.body.route_name,
-// title:          req.body.title
 // activity_type:  req.body.activity_type,
+// title:          req.body.title
 // cover_image:    req.body.cover_image,
 // description:    req.body.description,
 // difficulty:     req.body.difficulty,

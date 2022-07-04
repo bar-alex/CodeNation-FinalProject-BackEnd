@@ -9,46 +9,53 @@ const { jwtSecretKey } = require('../util/config');
 // const jwtSign = promisify(jwt.sign);
 
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        trim: true,
-        required: [true, "You must supply the username!"], 
-        unique: true,
-    },
-    password: {
-        type: String,
-        trim: true,
-        required: [true, "You must supply the password!"],
-    },
+const userSchema = new mongoose.Schema(
+    {
+        username: {
+            type: String,
+            trim: true,
+            required: [true, "You must supply the username!"], 
+            unique: true,
+        },
+        password: {
+            type: String,
+            trim: true,
+            required: [true, "You must supply the password!"],
+        },
 
-    email: {
-        type: String,
-        trim: true,
-        required: [true, "You must supply the email!"],
-        unique: true,
-        validate: {
-            validator: (v) => v.indexOf('@')>-1
-                && v.indexOf('@')<v.indexOf('.')
-                && v.indexOf(' ')===-1,
-            message: (props) => `${props.value} doesn't appear to be a valid email`,
+        email: {
+            type: String,
+            trim: true,
+            required: [true, "You must supply the email!"],
+            unique: true,
+            validate: {
+                validator: (v) => v.indexOf('@')>-1
+                    && v.indexOf('@')<v.indexOf('.')
+                    && v.indexOf(' ')===-1,
+                message: (props) => `${props.value} doesn't appear to be a valid email`,
+            }
+        },
+        full_name: {
+            type: String,
+            trim: true,        
+            required: [true, "You must supply the full name!"],
+        },
+
+        is_disabled: {
+            type: Boolean,
+            default: false,
+        },
+        is_admin: {
+            type: Boolean,
+            default: false,
         }
     },
-    full_name: {
-        type: String,
-        trim: true,        
-        required: [true, "You must supply the full name!"],
-    },
-
-    is_disabled: {
-        type: Boolean,
-        default: false,
-    },
-    is_admin: {
-        type: Boolean,
-        default: false,
+    {
+        timestamps: false,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
     }
-});
+);
 
 
 // gets reid of the 11000 error from mongoDb
