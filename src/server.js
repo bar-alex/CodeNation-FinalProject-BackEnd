@@ -33,6 +33,8 @@ app.use(morgan('combined'))
 app.use(express.json());
 app.use(cors());
 
+// base path
+app.use('/', (req, res) => { res.send('Code Nation M37 API for final project!') });
 
 // everything in the users router is prepended by the '/users'
 app.use('/users', userRouter);
