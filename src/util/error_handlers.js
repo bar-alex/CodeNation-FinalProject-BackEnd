@@ -1,9 +1,10 @@
 /** Response Error array
     [ 
-    { 
-        field: "email",
-        message": "momensherif.2019@gmail.com is already in use"
-    }, {}, {}, .. 
+        { 
+            field: "email",
+            message": "momensherif.2019@gmail.com is already in use"
+        }, 
+        {}, {}, .. 
     ]
 */
 

@@ -37,7 +37,7 @@ exports.authToken = async (req, res, next) => {
 exports.authPassword = async (req, res, next) => {
     console.log("->authPassword() is run");
     
-    try {
+    // try {
         // body must have auth_password
         if (!req.body.auth_password) throw new CustomError(401, 'Unauthorized - missing auth_password!');
 
@@ -51,7 +51,7 @@ exports.authPassword = async (req, res, next) => {
 
         next();
 
-    } catch (err) {
-        next(err);
-    }
+    // } catch (err) {
+    //     next(err);
+    // }
 };

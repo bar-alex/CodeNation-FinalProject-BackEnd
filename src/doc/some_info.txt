@@ -1,2 +1,3 @@
 morgan - logs requests
-http-errors - makes it easy to create errors?
+http-errors - makes it easy to create http errors?
+express-async-errors - helps express catching errors ain async functions on it's own, without the need of try/catch and next(err)

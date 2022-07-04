@@ -6,12 +6,15 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 
+// catches errors from async functions, only necessary until express 5.0
+require('express-async-errors');
+
 // Connect to mongoose
 require('./util/db_connection');
 
 // the user routes
 const userRouter = require('./user/routes');
-
+const routeRouter = require('./routes/routes')  // the end-point routes (paths) of the router, in the 'activity routes' section
 
 const app = express();
 
@@ -34,6 +37,9 @@ app.use(cors());
 
 // everything in the users router is prepended by the '/users'
 app.use('/users', userRouter);
+
+// everything in the routes router is prepended by the '/routes'
+app.use('/routes', routeRouter);
 
 
 // error handlers

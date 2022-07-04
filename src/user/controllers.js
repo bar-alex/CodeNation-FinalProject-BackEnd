@@ -17,7 +17,7 @@ exports.loginUser = async (req, res, next) => {
 // will create the user in the database, will return the user and the token
 exports.createUser = async (req, res, next) => {
     console.log('->createUser() is run');
-    try{
+    // try{
         const newUser = {
             username:    req.body.username,
             password:    req.body.password,
@@ -32,9 +32,9 @@ exports.createUser = async (req, res, next) => {
 
         const token = user.generateAuthToken();
         res.status(201).json({ user, token });
-    }catch(err){
-        next(err);
-    }
+    // }catch(err){
+    //     next(err);
+    // }
 };
 
 
@@ -42,7 +42,7 @@ exports.createUser = async (req, res, next) => {
 // uses th id got from the token // (stretch) or a username
 exports.updateUser = async (req, res, next) => {
     console.log('->updateUser() is run');
-    try{
+    // try{
         // already have user in req.user from authToken
         const user = await User.findById(req.user._id);
         // change fields if they're provided
@@ -54,9 +54,9 @@ exports.updateUser = async (req, res, next) => {
         // send back the changed user
         res.json( user );
 
-    } catch (err){
-        next(err);
-    }
+    // } catch (err){
+    //     next(err);
+    // }
 };
 
 
@@ -64,7 +64,7 @@ exports.updateUser = async (req, res, next) => {
 // uses the id gto from the token // (stretch) or a username
 exports.deleteUser = async (req, res, next) => {
     console.log('->deleteUser() is run');
-    try{
+    // try{
         // already have user in req.user from authToken
         const result = await User.deleteOne({ _id: req.user._id });
         
@@ -74,9 +74,10 @@ exports.deleteUser = async (req, res, next) => {
         else 
             throw new CustomError(500, `User ${req.user.username} was not deleted // deletedCount = ${result.deletedCount}`);
         
-    } catch (err){
-        next(err);
-    }
+        // todo: you also need to the activities linked to the user
+    // } catch (err){
+    //     next(err);
+    // }
 };
 
 
@@ -97,12 +98,3 @@ exports.getUser = async (req, res, next) => {
 // more functions for various reports could be here
 // the leaderboard report {filter on nothing, on date range, or route}
 // 
-
-
-// module.exports = {
-//     loginUser,
-//     createUser,
-//     updateUser,
-//     deleteUser,
-//     getUser
-// }

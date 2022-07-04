@@ -1,4 +1,4 @@
-:: User end-poins ::
+:: User end-points ::
 
 -- login user, returns userObj and token
 POST /users/login/ {username, password} => {userObj, token}
@@ -10,7 +10,7 @@ POST /users/register/ {userObj} => {userObj, token}
 PATCH /users/self {userObj, token, auth_password} => {userObj}
 
 -- delete user, requires token and password for self
-DELETE /users/self {token, auth_password} => success/failure
+DELETE /users/self {token, auth_password} => success/failure 
 
 -- returns the userObj for self, requires the token
 GET /users/self {token} => {userObj}
@@ -18,4 +18,27 @@ GET /users/self {token} => {userObj}
 -- returns the userObj for teh provided username (doesn't have to be self)
 GET /users/:username {token} => {userObj}
 
+
+=== === === === === === === === === ===
+:: Route end-points ::
+{ route_name, activity_type(run,cycle,swim), title, description, difficulty, distance, time, location, map_data}
+
+-- creates a new route, token is required
+POST /routes/create { routeObj, token } => {route}
+
+-- updates the specified route, token is required
+PATCH /routes/:route_name { routeObj, token } => {route}
+
+-- deletes the specified route, token is required
+DELETE /routes/:route_name {token} => {success/failure}
+
+-- returns the data for the specified route
+GET /routes/:route_name => {route}
+
+-- returns an array with data for all routes
+GET /routes/all => [{route},]
+
+
+=== === === === === === === === === ===
+:: Activity end-points :: 
 
