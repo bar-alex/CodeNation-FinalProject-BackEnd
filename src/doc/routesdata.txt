@@ -1,0 +1,54 @@
+1.
+The Meadow, Salford
+The Meadow is a small park and garden area that is somewhat secluded by the local river Irwell. There is a narrow gravel pathway that serves as a circuit. Ideal for offroad cycling and running. One lap around the circuit stands in at around 720 metres.
+lat: 53.48470075932541, 
+lng: -2.2675676805420717
+Running, Cycling
+lap: 		    770 (m)
+target: 		2 (mins)
+difficulty: 	easy
+Wooded, the Irwell River running next to it and very near to the city.
+
+2.
+Tandle Hill Park, Oldham
+Tandle Hill is a large country park with mostly wide artificial paths and tracks that are good for cycling and running. There is a large, wooded area all around the park area which is well looked after. You can generally follow a path all the way round in a circuit fashion if you so wish.
+lat: 53.5747324461941, 
+lng: -2.1463226357504683
+Running
+lap: 		    1890 (m)
+target: 		10 (mins)
+difficulty: 	easy
+Wooded, small shallow rivers and local to a town and has its own cafe.
+
+3.
+Heaton Park Endurance, Manchester
+Running
+Heaton Park is a large park area that has lots of amenities and culturally interesting things for people to visit and see. It has a large, wooded area surrounding it as well as a lake which is used for boating and a country manor house near the middle of the estate. Some of the paths are very wide and suitable for bike riding but some are quite narrow, and on busier days it may be very hard to cycle in certain areas.
+lat: 53.535673260450885, 
+lng: -2.2611054356818054
+lap: 		    3690 (m)
+target: 		15 (min)
+difficulty: 	hard
+Heavy woodland, lakes and rivers as well as plenty of amenities.
+
+4.
+Drink Water Park, Prestwich
+Drinkwater Park is a medium-sized park and garden with paths suitable for cycling and running, a skatepark and large rivers and streams where it is shallow enough to swim safely. Some of the trails are steep or narrow and so cycling or running can be difficult in places.
+lat: 53.521657048545414,
+lng: -2.2995113956995743
+Running
+lap:		670 (m)
+target:		1.30 (mins)
+difficulty:	easy
+Heavy woodland, shallow rivers where it’s possible to swim safely.
+
+5. Kersal Wetlands Sprint, Salford
+Cycling
+Kersal Wetlands is a large and open stretch of bog which dries out in the summer. The surrounding paths are very wide gravel tracks seemingly perfect for offroad biking with steady inclines and gentle ramps, as well as being suitable for running.
+lat: 53.508407682209736, 
+lng: -2.269879459334798
+lap: 		2320 (m)
+target: 		7.30 (mins)
+difficulty: 	moderate
+Open grassland, gravel paths and shallow bogs with the Irwell running alongside the area. One lap is long, and the surface of the track is very loose, but it will be travelling at consistent speeds and gradients.
+
